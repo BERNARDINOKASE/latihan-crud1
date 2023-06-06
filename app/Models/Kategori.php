@@ -9,6 +9,9 @@ class Kategori extends Model
 {
     use HasFactory;
 
+
+
+    protected $gurad = [];
     protected $fillable = [
         'id',
         'name',

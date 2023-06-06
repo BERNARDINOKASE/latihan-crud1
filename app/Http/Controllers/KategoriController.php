@@ -14,7 +14,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $data = Kategori::all();
+        return view('kategori.kategori', compact('data'));
     }
 
     /**
@@ -24,7 +25,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori.create');
     }
 
     /**
@@ -35,7 +36,14 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'id' => ['required'],
+                'name' => ['required'],
+            ]
+        );
+        Kategori::create($validated);
+        return to_route("kategori.index");
     }
 
     /**
