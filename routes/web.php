@@ -19,9 +19,9 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/kategori', KategoriController::class);
+// Route::resource('/kategori', KategoriController::class);
 
 
-// Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
-// Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
-// Route::get('/kategori/create/save', [KategoriController::class, 'store'])->name('kategori.store');
+Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
+Route::post('/kategori/save', [KategoriController::class, 'store'])->name('kategori.store');

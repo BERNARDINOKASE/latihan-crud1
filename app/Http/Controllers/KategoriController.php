@@ -36,14 +36,20 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(
-            [
-                'id' => ['required'],
-                'name' => ['required'],
-            ]
-        );
-        Kategori::create($validated);
-        return to_route("kategori.index");
+        // $validated = $request->validate(
+        //     [
+        //         'id' => ['required'],
+        //         'name' => ['required'],
+        //     ]
+        // );
+
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+        ];
+
+        Kategori::create($data);
+        return to_route('kategori.index');
     }
 
     /**
