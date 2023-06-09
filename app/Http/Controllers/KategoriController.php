@@ -36,12 +36,19 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate(
+        // $request->validate(
         //     [
-        //         'id' => ['required'],
-        //         'name' => ['required'],
+        //         'id' => 'required',
+        //         'name' => 'required',
+        //         'updated_at' => 'required',
+        //         'created_at' => 'required'
         //     ]
         // );
+
+        $request->validate([
+            'id' => 'required|numeric|min:3',
+            'name' => 'required',
+        ]);
 
         $data = [
             'id' => $request->id,

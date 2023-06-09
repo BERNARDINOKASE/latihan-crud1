@@ -14,6 +14,18 @@
         <div class="container">
             <div class="container-fluid">
                 <div class="col-6">
+                    @if ($errors->any())
+                    <div class="pt-3">
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{$item}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                        
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             Tambah Kategori
@@ -22,8 +34,12 @@
                             <form method="POST" action="{{route('kategori.store')}}">
                                 @csrf
                                 <div class="mb-3">
+                                    <label for="id" class="form-label">Id Kategori</label>
+                                    <input type="text" class="form-control " id="id" name="id">
+                                </div>
+                                <div class="mb-3">
                                     <label for="name" class="form-label">Nama Kategori</label>
-                                    <input type="text" class="form-control" id="name" name="name">
+                                    <input type="text" class="form-control " id="name" name="name">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </form>
