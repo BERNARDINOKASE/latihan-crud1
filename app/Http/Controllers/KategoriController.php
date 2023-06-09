@@ -14,8 +14,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $data = Kategori::all();
-        return view('kategori.kategori', compact('data'));
+        $data = Kategori::orderBy('name', 'ASC')->get();
+        return view('kategori.index', compact('data'));
     }
 
     /**
@@ -46,8 +46,15 @@ class KategoriController extends Controller
         // );
 
         $request->validate([
-            'id' => 'required|numeric|min:3',
-            'name' => 'required',
+            'id' => 'required|numeric|min:3|unique:kategoris',
+            'name' => 'required|min:3',
+        ], [
+            'id.required' => 'Id Belum Diisi.',
+            'id.unique' => 'Id Sudah Terdaftar.',
+            'id.numeric' => 'Id Harus Angka.',
+            'id.min' => 'Id Minimal 3 Angka.',
+            'name.required' => 'Nama Kategori Belum Diisi.',
+            'name.min' => 'Nama Kategori Minimal 3 Karakter.',
         ]);
 
         $data = [
@@ -56,7 +63,7 @@ class KategoriController extends Controller
         ];
 
         Kategori::create($data);
-        return to_route('kategori.index');
+        return to_route('kategori.index')->with('message', 'Kategori Berhasil Ditambahkan');
     }
 
     /**
